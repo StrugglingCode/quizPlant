@@ -1,5 +1,7 @@
 package com.example.quiz.Model
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import java.io.BufferedInputStream
 import java.io.BufferedReader
 import java.io.IOException
@@ -49,5 +51,26 @@ fun downloadJasonDataFrom(link:String):String
 
 
 }
+//function to download image from Internet
+    fun downloadPlantImage(pictureName:String?):Bitmap?
+    {
+        var bitMap:Bitmap? = null
+        val pictureLink:String= plantPlaces+"/photos/$pictureName"
+        val pictureUrl = URL(pictureLink)
+        val inputStream = pictureUrl.openConnection().getInputStream()
+
+        if(inputStream!=null)
+        {
+            bitMap = BitmapFactory.decodeStream(inputStream)
+        }
+
+return bitMap
+
+    }
+
+    companion object
+    {
+        val plantPlaces = "www.plantplaces.com"
+    }//has access to private members
 
 }

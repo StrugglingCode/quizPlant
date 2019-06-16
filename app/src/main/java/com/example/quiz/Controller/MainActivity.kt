@@ -2,6 +2,7 @@ package com.example.quiz.Controller
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.os.AsyncTask
@@ -150,6 +151,19 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    inner class image: AsyncTask<String,Int,Bitmap?>()
+    {
+        override fun doInBackground(vararg params: String?): Bitmap?
+        {
+
+        return null
+        }
+
+        override fun onPostExecute(result: Bitmap?) {
+            super.onPostExecute(result)
+        }
     }
 
 
