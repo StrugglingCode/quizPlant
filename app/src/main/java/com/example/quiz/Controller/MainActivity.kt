@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.Toast
 import com.example.quiz.Model.Plant
 import com.example.quiz.Model.downloadingObject
+import com.example.quiz.Model.parsePlantUtility
 import com.example.quiz.R
 
 class MainActivity : AppCompatActivity() {
@@ -21,38 +22,18 @@ private var cameraButton:Button?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
         if (checkInternetConnection()) {
             val innerClassObject = downloadingPlantTask()
             innerClassObject.execute()
-
-
         }
-        
+
     }
 
 
 
-/*Toast.makeText(this,"Override onCreate Method Called",Toast.LENGTH_SHORT).show()
 
-        val myPlant:Plant=Plant("","","","","","",0,0)    //calling constructor
-
-
-      /*  Plant("Koelreuteria","paniculata","","Golden Rain Tree",
-            "Koelreuteria_paniculata_branch.JPG",
-            "Branch of Koelreuteria paniculata",3,24)*/
-
-        myPlant.plantName="Wadas Memory Magnolia"
-              var a =         myPlant.plantName*/
-
-      /*  var flower = Plant()  //object1
-        var Tree = Plant()    // object 2
-
-        var collectionOfPlants:ArrayList<Plant> = ArrayList()
-
-        collectionOfPlants.add(flower)
-        Toast.makeText(this,"Flower object added",Toast.LENGTH_SHORT).show()
-        collectionOfPlants.add(Tree)
-        Toast.makeText(this,"Object 2 added",Toast.LENGTH_SHORT).show()*/
 
 
 
@@ -63,11 +44,13 @@ private var cameraButton:Button?=null
     {
         override fun doInBackground(vararg params: String?): List<Plant>?  //vararg kind of array    ?MEANS OPTIONAL
         {
-            val downloadingObject: downloadingObject =
-                downloadingObject()  //created object for downloadingObject class
-            val jsonData = downloadingObject.downloadJasonDataFrom("https://www.plantplaces.com/perl/mobile/flashcard.pl")
-            Log.i("JSON",jsonData)
-            return null
+//            val downloadingObject: downloadingObject =
+//                downloadingObject()  //created object for downloadingObject class
+//            val jsonData = downloadingObject.downloadJasonDataFrom("https://www.plantplaces.com/perl/mobile/flashcard.pl")
+//            Log.i("JSON",jsonData)
+
+            val parsePlant = parsePlantUtility()
+                return parsePlant.parsePlantObjectsFromJsonData()
 
         }
 
@@ -91,7 +74,7 @@ private var cameraButton:Button?=null
             return true
         }
         else
-            ceateAlert()
+            createAlert()
             return false
 
     }
@@ -103,10 +86,9 @@ private var cameraButton:Button?=null
         alerDialog.setMessage("Check Internet Connection")
 
         alerDialog.setButton(AlertDialog.BUTTON_POSITIVE,"Ok",
-            {
-            dialog: DialogInterface?, which: Int ->
-            startActivity(Intent(Settings.ACTION_SETTINGS))
-        })
+            { dialog: DialogInterface?, which: Int ->
+                startActivity(Intent(Settings.ACTION_SETTINGS))
+            })
 
         alerDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"Cancel",{
             dialog: DialogInterface?, which: Int ->

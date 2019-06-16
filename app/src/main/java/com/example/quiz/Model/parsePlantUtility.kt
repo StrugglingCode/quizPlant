@@ -15,7 +15,7 @@ class parsePlantUtility {
         var downloadingObject = downloadingObject()
         //object that can connect to the internet(downloadingObject() class already created)
 
-        var topLevelJsonData = downloadingObject.downloadJasonDataFrom("https://www.plantplaces.com/perl/mobile/flashcard.p")
+        var topLevelJsonData = downloadingObject.downloadJasonDataFrom("https://www.plantplaces.com/perl/mobile/flashcard.pl")
         //jason data is being stored in topLevelJasonData
         // data that is retrieved is just raw text
 
