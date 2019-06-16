@@ -1,14 +1,14 @@
-package com.example.quiz
+package com.example.quiz.Controller
 
-import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
-import android.view.View
 import android.widget.Button
-import android.widget.Toast
+import com.example.quiz.Model.Plant
+import com.example.quiz.Model.downloadingObject
+import com.example.quiz.R
 
 class MainActivity : AppCompatActivity() {
 private var cameraButton:Button?=null
@@ -58,7 +58,8 @@ val innerClassObject = downloadingPlantTask()
     {
         override fun doInBackground(vararg params: String?): List<Plant>?  //vararg kind of array    ?MEANS OPTIONAL
         {
-            val downloadingObject:downloadingObject = downloadingObject()  //created object for downloadingObject class
+            val downloadingObject: downloadingObject =
+                downloadingObject()  //created object for downloadingObject class
             val jsonData = downloadingObject.downloadJasonDataFrom("https://www.plantplaces.com/perl/mobile/flashcard.pl")
             Log.i("JSON",jsonData)
             return null
@@ -70,5 +71,22 @@ val innerClassObject = downloadingPlantTask()
         {
 
         }
+    }
+
+    //check for internetconnection
+
+    private fun checkInternetConnection():Boolean
+    {
+        val connectivityManager = this.getSystemService(android.content.Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        val isConnected = networkInfo!=null && networkInfo.isConnected
+
+        if(isConnected)
+        {
+            return true
+        }
+        else
+            return false
+
     }
 }

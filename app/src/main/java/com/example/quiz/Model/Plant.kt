@@ -1,11 +1,10 @@
-package com.example.quiz
+package com.example.quiz.Model
 
-class Plant(genus:String, species:String, cultivar:String,
-            common:String, pictureName:String, description:String,difficulty:Int,id:Int=0) //primary Constructor
+class Plant(var genus:String, var species:String, var cultivar:String,
+           var  common:String, var pictureName:String, var description:String,var difficulty:Int,var id:Int=0) //primary Constructor
 
 
 {
-
     constructor():this("","","","","","",0,0)    //this refers to primary constructor
 private var _plantName:String?=null             //instance Variable
 
