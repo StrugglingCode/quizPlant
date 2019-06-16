@@ -16,4 +16,8 @@ private var _plantName:String?=null             //instance Variable
     {
         _plantName = value
     }
+    override fun  toString():String
+    {
+       return "$common $species"
+    }
 }

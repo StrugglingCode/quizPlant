@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Quiz</string>
     <string name="asynctask_class">AsyncTask(Class)</string>
+    <string name="todo">TODO</string>
+    <string name="button4">Button4</string>
+    <string name="button3">Button3</string>
+    <string name="button2">Button2</string>
+    <string name="button1">Button1</string>
+
+
 </resources>
