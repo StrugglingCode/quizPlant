@@ -21,6 +21,14 @@ private var cameraButton:Button?=null
         cameraButton?.setOnClickListener(View.OnClickListener {
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startActivityForResult(cameraIntent,1)
+
+
+
+})
+
+        galleryButton?.setOnClickListener(View.OnClickListener {
+            val galleryIntent = Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(galleryIntent,1)
         })
 
         }

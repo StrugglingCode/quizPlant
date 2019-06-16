@@ -6,10 +6,10 @@ class Plant(genus:String, species:String, cultivar:String,
 
 {
 
-    constructor():this("","","","","","",0,0) //this refers to primary constructor
-private var _plantName:String?=null      //instance Variable
+    constructor():this("","","","","","",0,0)    //this refers to primary constructor
+private var _plantName:String?=null             //instance Variable
 
-    var plantName:String?               //another variable of same name as instance variable
+    var plantName:String?                      //another variable of same name as instance variable
 
     get() = _plantName
 
