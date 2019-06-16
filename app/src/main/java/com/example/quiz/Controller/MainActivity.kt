@@ -18,6 +18,7 @@ import com.example.quiz.Model.downloadingObject
 import com.example.quiz.Model.parsePlantUtility
 import com.example.quiz.R
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
@@ -155,10 +156,20 @@ class MainActivity : AppCompatActivity() {
 
     inner class image: AsyncTask<String,Int,Bitmap?>()
     {
-        override fun doInBackground(vararg params: String?): Bitmap?
+        override fun doInBackground(vararg pictureName: String?): Bitmap?
         {
+            try {
+                val downloadingImage = downloadingObject()
+                val bitmap = downloadingImage.downloadPlantImage(pictureName[0])
+                return bitmap
+            }
+            catch (e:Exception)
+            {
+                e.printStackTrace()
+            }
+            return null
 
-        return null
+
         }
 
         override fun onPostExecute(result: Bitmap?) {
