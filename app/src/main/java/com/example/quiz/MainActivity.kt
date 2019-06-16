@@ -5,6 +5,7 @@ import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -15,23 +16,17 @@ private var cameraButton:Button?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-                cameraButton = findViewById<Button>(R.id.buttonC)
-                galleryButton = findViewById(R.id.button9)
 
-        cameraButton?.setOnClickListener(View.OnClickListener {
-            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(cameraIntent,1)
+val innerClassObject = downloadingPlantTask()
+        innerClassObject.execute()
 
 
 
-})
 
-        galleryButton?.setOnClickListener(View.OnClickListener {
-            val galleryIntent = Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(galleryIntent,1)
-        })
+}
 
-        }
+
+
 /*Toast.makeText(this,"Override onCreate Method Called",Toast.LENGTH_SHORT).show()
 
         val myPlant:Plant=Plant("","","","","","",0,0)    //calling constructor
@@ -63,7 +58,11 @@ private var cameraButton:Button?=null
     {
         override fun doInBackground(vararg params: String?): List<Plant>?  //vararg kind of array    ?MEANS OPTIONAL
         {
-                     return null
+            val downloadingObject:downloadingObject = downloadingObject()  //created object for downloadingObject class
+            val jsonData = downloadingObject.downloadJasonDataFrom("https://www.plantplaces.com/perl/mobile/flashcard.pl")
+            Log.i("JSON",jsonData)
+            return null
+
         }
 
         override fun onPostExecute(result: List<Plant>?)
