@@ -1,11 +1,16 @@
 package com.example.quiz.Controller
 
+import android.content.DialogInterface
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
+import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import com.example.quiz.Model.Plant
 import com.example.quiz.Model.downloadingObject
 import com.example.quiz.R
@@ -16,14 +21,14 @@ private var cameraButton:Button?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-val innerClassObject = downloadingPlantTask()
-        innerClassObject.execute()
-
-
+        if (checkInternetConnection()) {
+            val innerClassObject = downloadingPlantTask()
+            innerClassObject.execute()
 
 
-}
+        }
+        
+    }
 
 
 
@@ -86,7 +91,29 @@ val innerClassObject = downloadingPlantTask()
             return true
         }
         else
+            ceateAlert()
             return false
 
+    }
+
+    private fun createAlert()
+    {
+        var alerDialog:AlertDialog = AlertDialog.Builder(this).create()
+        alerDialog.setTitle("Network Error")
+        alerDialog.setMessage("Check Internet Connection")
+
+        alerDialog.setButton(AlertDialog.BUTTON_POSITIVE,"Ok",
+            {
+            dialog: DialogInterface?, which: Int ->
+            startActivity(Intent(Settings.ACTION_SETTINGS))
+        })
+
+        alerDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"Cancel",{
+            dialog: DialogInterface?, which: Int ->
+            Toast.makeText(this,"You must be connected to internet",Toast.LENGTH_SHORT).show()
+
+            finish()
+        })
+        alerDialog.show()
     }
 }
